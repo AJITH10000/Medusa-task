@@ -2,9 +2,13 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy only the package files first to install dependencies
+COPY app/backend/package*.json ./
+
 RUN npm install
 
-COPY . .
+# Copy the rest of the code
+COPY app/backend/ .
+
 EXPOSE 3000
 CMD ["npm", "start"]
