@@ -13,6 +13,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: List workspace files (debugging)
+      run: ls -R
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
@@ -22,6 +25,11 @@ jobs:
 
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Ensure backend directory exists (optional, update as needed)
+      run: |
+        mkdir -p app/backend
+        # If you need to populate this directory, add extra commands here.
 
     - name: Build, tag, and push Docker image to ECR
       run: |
